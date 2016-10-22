@@ -1,0 +1,30 @@
+body {
+	background: #fff;
+	font-family: 'Helvetica Neue', Helvetica, Arial, 'HiraKakuPro-W3', 'Hiragino Kaku Gothic Pro W3', 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'メイリオ', Meiryo, '游ゴシック', YuGothic, 'ＭＳ Ｐゴシック', 'MS PGothic', 'ＭＳ ゴシック', 'MS Gothic', sans-serif;
+	height: 100%;
+	overflow:hidden;
+}
+.container-fluid > div {
+	height: 100%;
+	position:fixed;
+	top:0;
+	z-index:20;
+}
+.sidebar {
+	background-color: red;
+	left: 0;
+	width: 250px;
+}
+.main {
+	background-color: pink;
+	left:0;
+	padding-left: 250px;
+	padding-right: 315px;
+	width: 100%;
+	z-index: 19;
+}
+.ad {
+	background-color: blue;
+	right:0;
+	width:315px;
+}
