@@ -11,12 +11,11 @@ body {
 	z-index:20;
 }
 .sidebar {
-	background-color: red;
 	left: 0;
 	width: 250px;
+	position: relative;
 }
 .main {
-	background-color: pink;
 	left:0;
 	padding-left: 250px;
 	padding-right: 315px;
@@ -24,7 +23,98 @@ body {
 	z-index: 19;
 }
 .ad {
-	background-color: blue;
-	right:0;
-	width:315px;
+	right:	0;
+	width:	315px;
+}
+.sidebar, .ad {
+	background-color: #464646;
+}
+
+/* Sidebar */
+.sidebar .panel, .sidebar .panel .panel-heading {
+	background:	none;
+	border:none;
+	box-shadow: none;
+}
+.sidebar .panel .panel-heading {
+	color: #fff;
+	font-size: 20px;
+}
+.sidebar .panel .panel-body {
+	padding: 0;
+}
+.sidebar .list-group-item {
+	border-radius: 0;
+	text-align: left;
+}
+.sidebar .options button {
+	color: #fff;
+	outline: 0 !important;
+}
+.sidebar .easy {
+	background-color: #5dc0de;
+	border-color: #46b8da;
+}
+.sidebar .easy:hover, .sidebar .easy:active, .sidebar .easy:focus {
+	background-color: #31b0d5;
+	border-color: #269abc;
+}
+.sidebar .medium {
+	background-color: #f0ad4e;
+	border-color: #eea236;
+}
+.sidebar .medium:hover, .sidebar .medium:active, .sidebar .medium:focus {
+	background-color: #ec971f;
+	border-color: #d58512;
+}
+.sidebar .hard {
+	background-color: #d9534f;
+	border-color: #d43f3a;
+}
+.sidebar .hard:hover, .sidebar .hard:active, .sidebar .hard:focus {
+	background-color: #c9302c;
+	border-color: #ac2925;
+}
+.sidebar .expert {
+	background-color: #5cb85c;
+	border-color: #4cae4c;
+}
+.sidebar .expert:hover, .sidebar .expert:active, .sidebar .expert:focus {
+	background-color: #449d44;
+	border-color: #398439;
+}
+.sidebar .settings .checkbox:first-child {
+	margin-top: 0;
+}
+.sidebar .share {
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	width: 100%;
+}
+.sidebar .share {
+	margin-bottom: 0;
+}
+.sidebar .share .panel-heading {
+	/*border-bottom: 1px solid #ddd;*/
+}
+.sidebar .row {
+	margin: 0;
+}
+.sidebar .social {
+	cursor: pointer;
+	opacity: .95;
+	padding: 10px 15px;
+}
+.sidebar .social:hover {
+	opacity: 1;
+}
+.sidebar .twitter {
+	background-color: #5aa8df;
+}
+.sidebar .google-plus {
+	background-color: #df4a33;
+}
+.sidebar .github {
+	background-color: #111111;
 }
