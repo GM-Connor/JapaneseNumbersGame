@@ -118,3 +118,10 @@ body {
 .sidebar .github {
 	background-color: #111111;
 }
+
+
+/* .main */
+.main .progress {
+	background-color: rgba(0,0,0,.1);
+	border-radius: 0;
+}
