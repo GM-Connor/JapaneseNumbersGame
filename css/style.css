@@ -95,9 +95,6 @@ body {
 .sidebar .share {
 	margin-bottom: 0;
 }
-.sidebar .share .panel-heading {
-	/*border-bottom: 1px solid #ddd;*/
-}
 .sidebar .row {
 	margin: 0;
 }
@@ -124,4 +121,71 @@ body {
 .main .progress {
 	background-color: rgba(0,0,0,.1);
 	border-radius: 0;
+}
+.main .heading {
+	font-weight: 800;
+	margin: 0 0 50px;
+}
+.main .difficulty {
+	color: #fff;
+	text-align: left;
+}
+.main .site-name {
+	color: #fff;
+	font-size: 30px;
+	text-shadow: 0 1px 0 #ccc,
+				 0 6px 1px rgba(0,0,0,.1),
+				 0 0 5px rgba(0,0,0,.1),
+				 0 1px 3px rgba(0,0,0,.3),
+				 0 3px 5px rgba(0,0,0,.2),
+				 0 5px 10px rgba(0,0,0,.25),
+				 0 10px 10px rgba(0,0,0,.2),
+				 0 20px 20px rgba(0,0,0,.15);
+}
+.main .round {
+	color: #ffeb3b;
+	text-align: right;
+}
+.main .difficulty, .main .round {
+	font-size: 20px;
+}
+.main .heading span {
+	background: rgba(0,0,0,.1);
+	border: 1px solid rgba(0,0,0,.01);
+	padding: 10px;
+}
+.main .interactive .start {
+	border: 2px solid rgba(70,70,70,.3);
+	font-size: 20px;
+	font-weight: 800;
+	margin-bottom: 50px;
+	padding: 6px 36px;
+}
+.main .panel {
+	border: none;
+	border-radius: 0;
+	box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+}
+.main .panel .panel-heading {
+	background-color: #464646;
+	border-radius: 0;
+	color: #fff;
+	font-size: 18px;
+}
+.main .panel input, .main .panel button {
+	border-radius: 0;
+}
+.main .answer {
+	box-shadow: none;
+}
+.main .answer .panel-heading {
+	background-color: #d9534f;
+	border: 3px solid #464646;
+}
+.main .answer .panel-body {
+	background-color: #464646;
+	color: #fff;
+	/*height: 0;
+	padding: 0;*/
+	overflow: hidden;
 }
