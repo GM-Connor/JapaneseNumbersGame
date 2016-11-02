@@ -189,3 +189,133 @@ body {
 	padding: 0;*/
 	overflow: hidden;
 }
+
+
+
+
+/* media queries */
+
+/* width */
+@media (max-width: 1250px) {
+	.main .difficulty, .main .round {
+		font-size: 17px;
+	}
+	.main .site-name {
+		font-size: 25px;
+	}
+}
+@media (max-width: 1150px) {
+	.main .difficulty, .main .round {
+		font-size: 16px;
+	}
+	.main .heading span {
+		padding: 8px;
+	}
+	.main .site-name {
+		font-size: 23px;
+	}
+}
+@media (max-width: 1110px) {
+	.sidebar {
+		width: 225px;
+	}
+	.main {
+		padding-left: 225px;
+	}
+}
+@media (max-width: 1080px) {
+	.sidebar {
+		width: 200px;
+	}
+	.main {
+		padding-left: 200px;
+	}
+}
+
+/* height */
+@media (max-height: 510px) {
+	.main .heading, .main .interactive .start {
+		margin-bottom: 30px;
+	}
+	.main .interactive .start {
+		font-size: 16px;
+		padding: 5px 24px;
+	}
+	.main .panel > div {
+		padding: 10px;
+	}
+	.main .panel .panel-heading {
+		font-size: 16px;
+		padding: 8px 10px;
+	}
+}
+@media (max-height: 500px) {
+	.sidebar .share .panel-heading {
+		display: none;
+	}
+}
+@media (max-height: 450px) {
+	.sidebar .share {
+		display: none
+	}
+}
+@media (max-height: 425px) {
+	.main .heading, .main .interactive .start {
+		margin-bottom: 20px;
+	}
+	.main .answer .panel-body {
+		padding: 5px;
+	}
+	.main .answer p {
+		margin-bottom: 5px;
+	}
+}
+@media (max-height: 385px) {
+	.sidebar .difficulty {
+		margin-bottom: 0;
+	}
+	.main .heading, .main .interactive .start {
+		margin-bottom: 15px;
+	}
+	.main .interactive .start {
+		font-size: 14px;
+		padding: 4px 12px;
+	}
+	.main .typing .panel-body {
+		padding: 5px;
+	}
+	.main .panel .panel-heading {
+		font-size: 16px;
+		padding: 8px 10px;
+	}
+}
+@media (max-height: 370px) {
+	.sidebar .panel .panel-heading {
+		font-size: 18px;
+		padding: 8px 15px;
+	}
+	.sidebar .options {
+		margin-bottom: 5px;
+	}
+	.main .heading, .main .interactive .start {
+		margin-bottom: 10px;
+	}
+	.main .interactive .start {
+		font-size: 13px;
+		padding: 3px 10px;
+	}
+}
+@media (max-height: 340px) {
+	.sidebar .list-group-item {
+		padding: 8px 15px;
+	}
+	.main .typing {
+		margin-bottom: 10px;
+	}
+	.main .typing .panel-heading {
+		padding: 7px 15px;
+	}
+	.main .answer p {
+		margin-bottom: 4px;
+	}
+}
