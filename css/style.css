@@ -171,7 +171,7 @@ body {
 .main .difficulty, .main .round {
 	font-size: 20px;
 }
-.main .heading span {
+.main .heading div > span {
 	background: rgba(0,0,0,.1);
 	border: 1px solid rgba(0,0,0,.01);
 	padding: 10px;
@@ -231,7 +231,7 @@ body {
 	.main .difficulty, .main .round {
 		font-size: 16px;
 	}
-	.main .heading span {
+	.main .heading div > span {
 		padding: 8px;
 	}
 	.main .site-name {
@@ -279,6 +279,60 @@ body {
 	}
 	.main {
 		padding-right: 0;
+	}
+}
+@media (max-width: 600px) {
+	.interactive .focus {
+		width: 70%;
+	}
+	.interactive .spacer {
+		width: 15%;
+	}
+}
+@media (max-width: 595px) {
+	.main .heading {
+		position: relative;
+	}
+	.main .difficulty, .main .round {
+		position: absolute;
+		top: 0;
+		width: auto;
+	}
+	.main .round {
+		right: 0;
+	}
+	.main .difficulty {
+		left: 0;
+	}
+	.main .site-name {
+		width: 100%;
+	}
+}
+@media (max-width: 550px) {
+	.main .difficulty, .main .round {
+		top: -18px;
+	}
+	.main .difficulty {
+		left: -15px;
+	}
+	.main .round {
+		right: -15px;
+	}
+	.main .heading div > span {
+		padding: 3px 8px;
+	}
+}
+@media (max-width: 600px) {
+	.interactive .focus {
+		width: 80%;
+	}
+	.interactive .spacer {
+		width: 10%;
+	}
+}
+@media (max-width: 370px) {
+	.main .site-name {
+		font-size: 20px;
 	}
 }
 
