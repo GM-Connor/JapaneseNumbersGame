@@ -51,35 +51,35 @@ body {
 	color: #fff;
 	outline: 0 !important;
 }
-.sidebar .easy {
+.sidebar #easy {
 	background-color: #5dc0de;
 	border-color: #46b8da;
 }
-.sidebar .easy:hover, .sidebar .easy:active, .sidebar .easy:focus {
+.sidebar #easy:hover, .sidebar #easy:active, .sidebar #easy:focus, .sidebar #easy.active {
 	background-color: #31b0d5;
 	border-color: #269abc;
 }
-.sidebar .medium {
+.sidebar #medium {
 	background-color: #f0ad4e;
 	border-color: #eea236;
 }
-.sidebar .medium:hover, .sidebar .medium:active, .sidebar .medium:focus {
+.sidebar #medium:hover, .sidebar #medium:active, .sidebar #medium:focus, .sidebar #medium.active {
 	background-color: #ec971f;
 	border-color: #d58512;
 }
-.sidebar .hard {
+.sidebar #hard {
 	background-color: #d9534f;
 	border-color: #d43f3a;
 }
-.sidebar .hard:hover, .sidebar .hard:active, .sidebar .hard:focus {
+.sidebar #hard:hover, .sidebar #hard:active, .sidebar #hard:focus, .sidebar #hard.active {
 	background-color: #c9302c;
 	border-color: #ac2925;
 }
-.sidebar .expert {
+.sidebar #expert {
 	background-color: #5cb85c;
 	border-color: #4cae4c;
 }
-.sidebar .expert:hover, .sidebar .expert:active, .sidebar .expert:focus {
+.sidebar #expert:hover, .sidebar #expert:active, .sidebar #expert:focus, .sidebar #expert.active {
 	background-color: #449d44;
 	border-color: #398439;
 }
