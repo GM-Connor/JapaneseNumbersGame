@@ -212,6 +212,10 @@ body {
 	overflow: hidden;
 }
 
+.main .hiragana, .main .romaji {
+	display: none;
+}
+
 
 
 

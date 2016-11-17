@@ -6,6 +6,19 @@ function addDifficultyListeners(difficulties) {
 			});
 		})(difficulties[i]);
 }
+function addTogglesListeners(toggles) {
+	for (var key in toggles)
+		if (toggles.hasOwnProperty(key))
+			(function(toggle) {
+				$('.sidebar input[name=' + key + ']')[0].addEventListener('click', function() {
+					changeToggle(toggle);
+				});
+			})(toggles[key]);
+}
+function changeToggle(toggle) {
+	toggle.toggle();
+}
+
 
 
 function changeDifficulty(difficulty) {
@@ -54,9 +67,16 @@ function capitalize(string) {
 }
 
 
+var game = {
 
+};
 
 var difficulties = ['easy', 'medium', 'hard', 'expert'];
+var toggles = {'show-romaji': $('.main .romaji'), 'show-hiragana': $('.main .hiragana')};
 
 addDifficultyListeners(difficulties);
-$('.sidebar #' + difficulties[0])[0].click();	/* set default difficulty (first element in difficulties[]) */
+addTogglesListeners(toggles);
+
+$('.sidebar #easy')[0].click();						/* set default difficulty to easy */
+$('.sidebar input[name=show-romaji]').click();		/* romaji shown by default */
+$('.sidebar input[name=show-hiragana]').click();	/* hiragana shown by default */
