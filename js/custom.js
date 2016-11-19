@@ -57,7 +57,6 @@ function changeDifficulty(difficulty) {
 	changeBackground(difficulty);
 	changeDiffText(difficulty);
 	newGame(difficulty);
-	console.log(game);
 	return true;
 }
 /* removes .active class from all difficulties in sidebar */
@@ -151,6 +150,7 @@ function focusInput() {
 function newNum() {
 	/* left off here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 }
+
 
 
 var game = {
