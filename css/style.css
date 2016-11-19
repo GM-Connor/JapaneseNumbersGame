@@ -201,18 +201,26 @@ body {
 	box-shadow: none;
 }
 .main .answer .panel-heading {
-	background-color: #d9534f;
+	background-color: #464646;	/* change this color based on if correct answer */
 	border: 3px solid #464646;
 }
-.main .answer .panel-body {
+.main .answer .panel-body, .main .about {
 	background-color: #464646;
 	color: #fff;
-	/*height: 0;
-	padding: 0;*/
 	overflow: hidden;
 }
 
-.main .hiragana, .main .romaji {
+.main .about {
+	border-radius: 5px;
+	box-shadow: none;
+}
+.main .about .panel-body {
+	padding: 30px;
+}
+
+
+/* hidden by default */
+.main .hiragana, .main .romaji, .main .typing, .main .answer, .main .answer .panel-body {
 	display: none;
 }
 

@@ -1,9 +1,11 @@
-/* best function */
 var assert = function(condition, message) { 
     if (!condition)
         throw Error('Assert failed' + (typeof message !== 'undefined' ? ': ' + message : ''));
 };
 
+
+
+/* adding listeners */
 function addDifficultyListeners(difficulties) {
 	assert(typeof difficulties == 'object');
 	for (var i = 0; i < difficulties.length; ++i)
@@ -36,15 +38,26 @@ function changeToggle(toggle) {
 	toggle.toggle();
 	return true;
 }
+function addButtonListener() {
+	var element = $('.main .start')[0];
+	assert(element != undefined);
+	element.addEventListener('click', function() {
+		startGame();
+	});
+	return true;
+}
 
+
+
+/* changing difficulty */
 function changeDifficulty(difficulty) {
 	assert(typeof difficulty == 'string');
-	assert(typeof game == 'object');
-	game['difficulty'] = difficulty;
 	deActive();
 	$(event.target).addClass('active');
 	changeBackground(difficulty);
 	changeDiffText(difficulty);
+	newGame(difficulty);
+	console.log(game);
 	return true;
 }
 /* removes .active class from all difficulties in sidebar */
@@ -89,6 +102,7 @@ function removeBackground() {
 	}
 	return true;
 }
+/* Changes the block text that says what the current difficulty is */
 function changeDiffText(difficulty) {
 	assert(typeof difficulty == 'string');
 	var element = $('.main .heading .difficulty span')[0];
@@ -100,13 +114,94 @@ function capitalize(string) {
 	assert(typeof string == 'string');
 	return string.charAt(0).toUpperCase() + string.slice(1);
 }
+function newGame(difficulty) {
+	assert(typeof difficulty == 'string');
+	assert(typeof game == 'object');
+	game.isNewGame = true;
+	game.isInQuestion = false;
+	game.difficulty = difficulty;
+	game.round = 1;
+	game.setButtonText('Start');
+	game.setInteractionDisplay('none');
+	game.setAboutDisplay('block');
+	game.setButtonDisability(false);
+}
+function startGame() {
+	assert(typeof game == 'object');
+	game.setButtonText('Continue');
+	game.setAboutDisplay('none');
+	game.setInteractionDisplay('block');
+	newCard();
+}
+/* handles generating number, diabling button, timer, etc */
+function newCard() {
+	game.setButtonDisability(true);
+	//get number
+	newNum();
+	game.setNumber(89723987018012374019823748738);
+	focusInput();
+	//start timer
+}
+/* sets input field in focus */
+function focusInput() {
+	var element = $('.main .input');
+	assert(element.length != 0);
+	element.focus();
+}
+function newNum() {
+	/* left off here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+}
 
 
 var game = {
 	'isNewGame': true,		/* does green button say 'Start' or 'Continue'? */
 	'isInQuestion': false,	/* should 'Continue' button be greyed out? */
 	'difficulty': null,
-	'round': 1
+	'round': 1,
+	'setButtonText': function(string) {
+		assert(typeof string == 'string');
+
+		var element = $('.main .start')[0];
+		assert(element != undefined);
+		element.innerHTML = string;
+		return true;
+	},
+	'setInteractionDisplay': function(string) {
+		assert(typeof string == 'string');
+
+		var element = $('.main .typing');
+		assert(element.length != 0);
+		element.css('display', string);
+
+		var element = $('.main .answer');
+		assert(element.length != 0);
+		element.css('display', string);
+		return true;
+	},
+	'setAboutDisplay': function(string) {
+		assert(typeof string == 'string');
+
+		var element = $('.main .about');
+		assert(element.length != 0);
+		element.css('display', string);
+		return true;
+	},
+	'setButtonDisability': function(state) {
+		assert(typeof state == 'boolean');
+
+		var element = $('.main .start');
+		assert(element.length != 0);
+		element.prop('disabled', state);
+		return true;
+	},
+	'setNumber': function(num) {
+		assert(typeof num == 'number');
+
+		var element = $('.main .typing .panel-heading')[0];
+		assert(element != undefined);
+		element.innerHTML = num;
+		return true;
+	},
 };
 
 var difficulties = ['easy', 'medium', 'hard', 'expert'];
@@ -114,6 +209,7 @@ var toggles = {'show-romaji': $('.main .romaji'), 'show-hiragana': $('.main .hir
 
 addDifficultyListeners(difficulties);
 addTogglesListeners(toggles);
+addButtonListener();
 
 $('.sidebar #easy')[0].click();						/* set default difficulty to easy */
 $('.sidebar input[name=show-romaji]').click();		/* romaji shown by default */
