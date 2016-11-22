@@ -51,6 +51,9 @@ body {
 	color: #fff;
 	outline: 0 !important;
 }
+.sidebar .options .tooltip {
+	white-space: nowrap;
+}
 .sidebar #easy {
 	background-color: #5dc0de;
 	border-color: #46b8da;

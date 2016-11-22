@@ -46,6 +46,10 @@ function addButtonListener() {
 	});
 	return true;
 }
+function addTooltipListeners() {
+	$('[data-toggle="tooltip"]').tooltip();
+	return true;
+}
 
 
 
@@ -210,6 +214,8 @@ var toggles = {'show-romaji': $('.main .romaji'), 'show-hiragana': $('.main .hir
 addDifficultyListeners(difficulties);
 addTogglesListeners(toggles);
 addButtonListener();
+addTooltipListeners();
+
 
 $('.sidebar #easy')[0].click();						/* set default difficulty to easy */
 $('.sidebar input[name=show-romaji]').click();		/* romaji shown by default */
