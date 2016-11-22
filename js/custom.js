@@ -2,6 +2,14 @@ var assert = function(condition, message) {
     if (!condition)
         throw Error('Assert failed' + (typeof message !== 'undefined' ? ': ' + message : ''));
 };
+/* generates random number between min (inclusive) and max (inclusive) */
+function getRandomInt(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+/* adds commas to numbers. ex. 1,234,456 */
+function numberWithCommas(n) {
+	return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 
 
@@ -141,7 +149,7 @@ function newCard() {
 	game.setButtonDisability(true);
 	//get number
 	newNum();
-	game.setNumber(89723987018012374019823748738);
+	game.setNumber(game.num);
 	focusInput();
 	//start timer
 }
@@ -151,8 +159,53 @@ function focusInput() {
 	assert(element.length != 0);
 	element.focus();
 }
+/* gets num based on difficulty level */
 function newNum() {
-	/* left off here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+	assert(typeof game == 'object');
+	var rand, num, easy, medium, hard;
+	rand = getRandomInt(0, 100);
+	switch(game.difficulty) {
+		case "easy":
+			num = easyRange();
+			break;
+		case "medium":
+			if (rand <= 15)
+				num = easyRange();
+			else
+				num = mediumRange();
+			break;
+		case "hard":
+			if (rand <= 10)
+				num = easyRange();
+			else if (rand <= 25)
+				num = mediumRange();
+			else
+				num = hardRange();
+			break;
+		case "expert":
+			if (rand <= 5)
+				num = easyRange();
+			else if (rand <= 15)
+				num = mediumRange();
+			else if (rand <= 30)
+				num = hardRange();
+			else
+				num = expertRange();
+			break;
+	}
+	game.num = num;
+}
+function easyRange() {
+	return getRandomInt(0, 100);
+}
+function mediumRange() {
+	return getRandomInt(0, 10000);
+}
+function hardRange() {
+	return getRandomInt(0, 100000000);
+}
+function expertRange() {
+	return getRandomInt(0, 1000000000000);
 }
 
 
@@ -203,7 +256,7 @@ var game = {
 
 		var element = $('.main .typing .panel-heading')[0];
 		assert(element != undefined);
-		element.innerHTML = num;
+		element.innerHTML = numberWithCommas(num);
 		return true;
 	},
 };
