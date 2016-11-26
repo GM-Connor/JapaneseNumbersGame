@@ -273,3 +273,4 @@ addTooltipListeners();
 $('.sidebar #easy')[0].click();						/* set default difficulty to easy */
 $('.sidebar input[name=show-romaji]').click();		/* romaji shown by default */
 $('.sidebar input[name=show-hiragana]').click();	/* hiragana shown by default */
+
