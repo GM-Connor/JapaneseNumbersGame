@@ -147,9 +147,16 @@ function startGame() {
 /* handles generating number, diabling button, timer, etc */
 function newCard() {
 	game.setButtonDisability(true);
+
+	game.setAnswerDisplay('block');	// testing only!!!!!!!!!!!!!
+
 	//get number
 	newNum();
 	game.setNumber(game.num);
+	jpconv.set(game.num);
+	game.setKanjiAnswer(jpconv.kanji);
+	game.setHiraganaAnswer(jpconv.hiragana);
+	game.setRomajiAnswer(jpconv.romaji);
 	focusInput();
 	//start timer
 }
@@ -243,6 +250,14 @@ var game = {
 		element.css('display', string);
 		return true;
 	},
+	'setAnswerDisplay': function(string) {
+		assert(typeof string == 'string');
+
+		var element = $('.main .answer .panel-body');
+		assert(element.length != 0);
+		element.css('display', string);
+		return true;
+	},
 	'setButtonDisability': function(state) {
 		assert(typeof state == 'boolean');
 
@@ -259,6 +274,30 @@ var game = {
 		element.innerHTML = numberWithCommas(num);
 		return true;
 	},
+	'setKanjiAnswer': function(kanjiAnswer) {
+		assert(typeof kanjiAnswer == 'string');
+
+		var element = $('.main .answer .kanji')[0];
+		assert(element != undefined);
+		element.innerHTML = kanjiAnswer;
+		return true;
+	},
+	'setHiraganaAnswer': function(hiraganaAnswer) {
+		assert(typeof hiraganaAnswer == 'string');
+
+		var element = $('.main .answer .hiragana')[0];
+		assert(element != undefined);
+		element.innerHTML = hiraganaAnswer;
+		return true;
+	},
+	'setRomajiAnswer': function(romajiAnswer) {
+		assert(typeof romajiAnswer == 'string');
+
+		var element = $('.main .answer .romaji')[0];
+		assert(element != undefined);
+		element.innerHTML = romajiAnswer;
+		return true;
+	}
 };
 
 var difficulties = ['easy', 'medium', 'hard', 'expert'];

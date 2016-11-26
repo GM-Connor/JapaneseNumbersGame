@@ -83,13 +83,16 @@ var jpconv = {
 	'set': function(decimal) {
 		this.answers = [];
 		this.decimalToRomaji(decimal);
+		this.kanji = this.answers[0];
+		this.hiragana = this.answers[1];
+		this.romaji = this.answers[2];
 		return true;
 	},
 
 	/* checks if answer is correct */
 	'isAnswer': function(string) {
 		for (var i = 0; i < this.answers.length; ++i) {
-			if (string.replace(/\s/g,'').toLowerCase() === this.answers[i])
+			if (string.replace(/\s/g,'').toLowerCase() === this.answers[i].split(' ').join(''))
 				return true;
 		}
 		return false;
@@ -122,7 +125,7 @@ var jpconv = {
 		for (var i = 0; i < hiragana_arr.length; ++i)
 			result.push(this.mapHiragana(hiragana_arr[i]));
 
-		this.answers.push(result.join(''));
+		this.answers.push(result.join(' '));
 		return result;
 	},
 
@@ -137,7 +140,7 @@ var jpconv = {
 			hiragana_result.unshift(this.mapKanji(current_char, next_char, prev_char));
 		}
 		hiragana_result = hiragana_result.join(',').replace(/っ,/g, 'っ').split(',');
-		this.answers.push(hiragana_result.join(''));
+		this.answers.push(hiragana_result.join(' '));
 		return hiragana_result; 
 	},
 
