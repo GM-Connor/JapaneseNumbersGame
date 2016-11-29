@@ -46,17 +46,32 @@ function changeToggle(toggle) {
 	toggle.toggle();
 	return true;
 }
-function addButtonListener() {
+function addButtonListeners() {
 	var element = $('.main .start')[0];
 	assert(element != undefined);
 	element.addEventListener('click', function() {
 		startGame();
+	});
+
+	element = document.getElementById('submitButton');
+	assert(element != undefined);
+	element.addEventListener('click', function() {
+		game.submitAnswer();
 	});
 	return true;
 }
 function addTooltipListeners() {
 	$('[data-toggle="tooltip"]').tooltip();
 	return true;
+}
+function addInputfieldListener() {
+	var element = document.getElementById('inputField');
+	assert(element != undefined);
+	element.addEventListener('keyup', function(event) {
+		event.preventDefault();
+		if (event.keyCode == 13)
+			game.submitAnswer();
+	});
 }
 
 
@@ -132,6 +147,7 @@ function newGame(difficulty) {
 	game.isInQuestion = false;
 	game.difficulty = difficulty;
 	game.round = 1;
+	game.roundProgress = 0;
 	game.setButtonText('Start');
 	game.setInteractionDisplay('none');
 	game.setAboutDisplay('block');
@@ -148,9 +164,6 @@ function startGame() {
 function newCard() {
 	game.setButtonDisability(true);
 
-	game.setAnswerDisplay('block');	// testing only!!!!!!!!!!!!!
-
-	//get number
 	newNum();
 	game.setNumber(game.num);
 	jpconv.set(game.num);
@@ -222,6 +235,29 @@ var game = {
 	'isInQuestion': false,	/* should 'Continue' button be greyed out? */
 	'difficulty': null,
 	'round': 1,
+	'roundProgress': 0,
+	'cardsPerRound': 13,
+	'setProgress': function(cardsCompleted) {
+		assert(typeof cardsCompleted == 'number');
+		assert(cardsCompleted <= this.cardsPerRound);
+		assert(cardsCompleted >= 0);
+
+		this.roundProgress = cardsCompleted;
+
+		var element = $('.progress .progress-bar')[0];
+		assert(element != undefined);
+		var progress = Math.ceil((this.roundProgress/this.cardsPerRound)*100);
+
+		element.setAttribute('aria-valuenow', progress);
+		element.innerHTML = progress + '%';
+		element.style.width = progress + '%';
+		return true;
+	},
+	'increaseProgress': function() {
+		var current_progress = this.roundProgress;
+		this.setProgress(current_progress+1);
+		return true
+	},
 	'setButtonText': function(string) {
 		assert(typeof string == 'string');
 
@@ -297,18 +333,46 @@ var game = {
 		assert(element != undefined);
 		element.innerHTML = romajiAnswer;
 		return true;
+	},
+	'submitAnswer': function() {
+		var element = document.getElementById('inputField');
+		assert(element != undefined);
+
+		if(jpconv.isAnswer(element.value)) {	/* if answer is right */
+			// change answer color
+			// show answer box 
+			// ungrey continue button
+			// bring continue button to focus (so user can press enter to continue)
+			this.increaseProgress();
+			console.log("correct!");
+		} else {
+			// change answer color
+			// if exceeded tries
+				// ungrey continue button
+				// bring continue button to focus (so user can press enter to continue)
+
+			// else
+				// select all input for retry
+			console.log("incorrect :(");
+		}
+
 	}
 };
 
-var difficulties = ['easy', 'medium', 'hard', 'expert'];
-var toggles = {'show-romaji': $('.main .romaji'), 'show-hiragana': $('.main .hiragana')};
+function init() {
+	var difficulties = ['easy', 'medium', 'hard', 'expert'];
+	var toggles = {'show-romaji': $('.main .romaji'), 'show-hiragana': $('.main .hiragana')};
 
-addDifficultyListeners(difficulties);
-addTogglesListeners(toggles);
-addButtonListener();
-addTooltipListeners();
+	addDifficultyListeners(difficulties);
+	addTogglesListeners(toggles);
+	addButtonListeners();
+	addTooltipListeners();
+	addInputfieldListener();
+
+	$('.sidebar #easy')[0].click();						/* set default difficulty to easy */
+	$('.sidebar input[name=show-romaji]').click();		/* romaji shown by default */
+	$('.sidebar input[name=show-hiragana]').click();	/* hiragana shown by default */
+}
 
 
-$('.sidebar #easy')[0].click();						/* set default difficulty to easy */
-$('.sidebar input[name=show-romaji]').click();		/* romaji shown by default */
-$('.sidebar input[name=show-hiragana]').click();	/* hiragana shown by default */
+init();
