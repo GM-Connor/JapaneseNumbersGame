@@ -143,6 +143,7 @@ function capitalize(string) {
 function newGame(difficulty) {
 	assert(typeof difficulty == 'string');
 	assert(typeof game == 'object');
+	game.resetProgress();
 	game.isNewGame = true;
 	game.isInQuestion = false;
 	game.difficulty = difficulty;
@@ -158,11 +159,17 @@ function startGame() {
 	game.setButtonText('Continue');
 	game.setAboutDisplay('none');
 	game.setInteractionDisplay('block');
+	game.setAnswerDisplay('none');
+	game.setAnswerColor('default');
+
 	newCard();
 }
 /* handles generating number, diabling button, timer, etc */
 function newCard() {
+	game.isInQuestion = false;
+	game.setAnswerColor('default');
 	game.setButtonDisability(true);
+	game.inputField.value = '';
 
 	newNum();
 	game.setNumber(game.num);
@@ -183,7 +190,7 @@ function focusInput() {
 function newNum() {
 	assert(typeof game == 'object');
 	var rand, num, easy, medium, hard;
-	rand = getRandomInt(0, 100);
+	rand = getRandomInt(Math.min(1*game.round, 20), 100);
 	switch(game.difficulty) {
 		case "easy":
 			num = easyRange();
@@ -216,16 +223,16 @@ function newNum() {
 	game.num = num;
 }
 function easyRange() {
-	return getRandomInt(0, 100);
+	return getRandomInt(1, 100);
 }
 function mediumRange() {
-	return getRandomInt(0, 10000);
+	return getRandomInt(1, 10000);
 }
 function hardRange() {
-	return getRandomInt(0, 100000000);
+	return getRandomInt(1, 100000000);
 }
 function expertRange() {
-	return getRandomInt(0, 1000000000000);
+	return getRandomInt(1, 1000000000000);
 }
 
 
@@ -235,8 +242,13 @@ var game = {
 	'isInQuestion': false,	/* should 'Continue' button be greyed out? */
 	'difficulty': null,
 	'round': 1,
+	'maxRounds': 20,
 	'roundProgress': 0,
 	'cardsPerRound': 13,
+	'tries': 0,
+	'maxTries': 2,
+	'button': document.getElementById('mainButton'),
+	'inputField': document.getElementById('inputField'), 
 	'setProgress': function(cardsCompleted) {
 		assert(typeof cardsCompleted == 'number');
 		assert(cardsCompleted <= this.cardsPerRound);
@@ -256,7 +268,30 @@ var game = {
 	'increaseProgress': function() {
 		var current_progress = this.roundProgress;
 		this.setProgress(current_progress+1);
+		return true;
+	},
+	'resetProgress': function() {
+		this.setProgress(0);
 		return true
+	},
+	'resetTries': function() {
+		this.tries = 0;
+		return true;
+	},
+	'setRound': function(round) {
+		assert(typeof round == 'number');
+		assert(round <= this.maxRounds);
+		assert(round > 0);
+		this.round = round;
+		return true;
+	},
+	'increaseRound': function() {
+		this.setRound(this.round+1);
+		return true;
+	},
+	'resetRounds': function() {
+		this.setRound(1);
+		return true;
 	},
 	'setButtonText': function(string) {
 		assert(typeof string == 'string');
@@ -334,28 +369,59 @@ var game = {
 		element.innerHTML = romajiAnswer;
 		return true;
 	},
+	'setAnswerColor': function(color) {
+		assert(typeof color == 'string');
+
+		var element = $('.main .answer .panel-heading')[0];
+		assert(element != undefined);
+		switch(color) {
+			case 'default':
+				color = '#464646';
+				break;
+			case 'red':
+				color = '#c9302c';
+				break;
+			case 'green':
+				color = '#449d44';
+				break;
+		}
+		element.style.backgroundColor = color;
+		return true;
+	},
 	'submitAnswer': function() {
-		var element = document.getElementById('inputField');
+		var element = this.inputField;
 		assert(element != undefined);
 
-		if(jpconv.isAnswer(element.value)) {	/* if answer is right */
-			// change answer color
-			// show answer box 
-			// ungrey continue button
-			// bring continue button to focus (so user can press enter to continue)
-			this.increaseProgress();
-			console.log("correct!");
-		} else {
-			// change answer color
-			// if exceeded tries
-				// ungrey continue button
-				// bring continue button to focus (so user can press enter to continue)
-
-			// else
-				// select all input for retry
-			console.log("incorrect :(");
+		if (element.value && !this.isInQuestion) {
+			if(jpconv.isAnswer(element.value)) {	/* if answer is right */
+				this.setAnswerColor('green');
+				this.setAnswerDisplay('block');
+				this.setButtonDisability(false);
+				element.value = '';
+				this.focusButton();
+				this.increaseProgress();
+				this.isInQuestion = true;
+			} else {
+				this.tries++;
+				this.setAnswerColor('red');
+				if (this.tries >= this.maxTries) {
+					this.resetTries();
+					this.setAnswerDisplay('block');
+					this.setButtonDisability(false);
+					element.value = '';
+					this.focusButton();
+					this.isInQuestion = true;
+				} else {
+					element.select();
+				}
+			}
 		}
-
+		return true;
+	},
+	'focusButton': function() {
+		assert(this.button != undefined);
+		$(this.button).focus();
+		return true;
 	}
 };
 
