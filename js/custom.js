@@ -162,6 +162,14 @@ function startGame() {
 	game.setAnswerDisplay('none');
 	game.setAnswerColor('default');
 
+	if (game.roundProgress == game.cardsPerRound) {
+		game.increaseRound();
+		var element = $('span[title="Round"]')[0];
+		assert(element != undefined);
+		element.innerHTML = '<span>Round </span>' + game.round;
+		game.resetProgress();
+	}
+
 	newCard();
 }
 /* handles generating number, diabling button, timer, etc */
@@ -244,7 +252,7 @@ var game = {
 	'round': 1,
 	'maxRounds': 20,
 	'roundProgress': 0,
-	'cardsPerRound': 13,
+	'cardsPerRound': 5,
 	'tries': 0,
 	'maxTries': 2,
 	'button': document.getElementById('mainButton'),
@@ -263,6 +271,10 @@ var game = {
 		element.setAttribute('aria-valuenow', progress);
 		element.innerHTML = progress + '%';
 		element.style.width = progress + '%';
+
+		if (this.roundProgress == this.cardsPerRound)
+			this.setButtonText('Next round');
+
 		return true;
 	},
 	'increaseProgress': function() {
@@ -392,7 +404,10 @@ var game = {
 		var element = this.inputField;
 		assert(element != undefined);
 
-		if (element.value && !this.isInQuestion) {
+		if (this.roundProgress == this.cardsPerRound)
+			this.increaseRound;
+
+		else if (element.value && !this.isInQuestion) {
 			if(jpconv.isAnswer(element.value)) {	/* if answer is right */
 				this.setAnswerColor('green');
 				this.setAnswerDisplay('block');
