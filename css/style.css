@@ -4,6 +4,9 @@ body {
 	height: 100%;
 	overflow:hidden;
 }
+.tooltip {
+	white-space: nowrap;
+}
 .container-fluid > div {
 	height: 100%;
 	position:fixed;
@@ -50,9 +53,6 @@ body {
 .sidebar .options button {
 	color: #fff;
 	outline: 0 !important;
-}
-.sidebar .options .tooltip {
-	white-space: nowrap;
 }
 .sidebar #easy {
 	background-color: #5dc0de;
