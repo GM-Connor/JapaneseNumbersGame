@@ -232,6 +232,10 @@ body {
 	display: none;
 }
 
+.ad .medium {
+	display: none;
+}
+
 
 
 /* media queries */
@@ -276,6 +280,12 @@ body {
 @media (max-width: 1250px) {
 	.ad {
 		width: 175px;
+	}
+	.ad .medium {
+		display: block;
+	}
+	.ad .large {
+		display: none;
 	}
 	.main {
 		padding-right: 175px;
