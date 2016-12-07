@@ -58,6 +58,12 @@ function addButtonListeners() {
 	element.addEventListener('click', function() {
 		game.submitAnswer();
 	});
+
+	element = document.getElementById('sidebarExpand');
+	assert(element != undefined);
+	element.addEventListener('click', function() {
+		toggleSidebar();
+	});
 	return true;
 }
 function addTooltipListeners() {
@@ -74,7 +80,31 @@ function addInputfieldListener() {
 	});
 }
 
+/* toggleSidebar: toggles sidebar's expanded state (only matters when width too short )*/
+function toggleSidebar() {
+	(window.sidebarState) ? collapseSidebar() : expandSidebar();
+	window.sidebarState = !(window.sidebarState);
+}
+/* expandSidebar: expands sidebar */
+function expandSidebar() {
+	var element = $('.sidebar');
+	element.removeClass('collapsed');
+	element.addClass('expanded');
 
+	element = $('.sidebar .expand .glyphicon');
+	element.removeClass('glyphicon-chevron-right');
+	element.addClass('glyphicon-chevron-left');
+}
+/* collapseSidebar: expands sidebar */
+function collapseSidebar() {
+	var element = $('.sidebar');
+	element.removeClass('expanded');
+	element.addClass('collapsed');
+
+	element = $('.sidebar .expand .glyphicon');
+	element.removeClass('glyphicon-chevron-left');
+	element.addClass('glyphicon-chevron-right');
+}
 
 /* changing difficulty */
 function changeDifficulty(difficulty) {
@@ -242,6 +272,8 @@ function hardRange() {
 function expertRange() {
 	return getRandomInt(1, 1000000000000);
 }
+
+
 
 
 
@@ -441,6 +473,8 @@ var game = {
 };
 
 function init() {
+	window.sidebarState = false;	/* collapsed when width is too short */
+
 	var difficulties = ['easy', 'medium', 'hard', 'expert'];
 	var toggles = {'show-romaji': $('.main .romaji'), 'show-hiragana': $('.main .hiragana')};
 

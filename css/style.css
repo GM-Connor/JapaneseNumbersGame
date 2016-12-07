@@ -17,6 +17,11 @@ body {
 	left: 0;
 	width: 250px;
 	position: relative;
+	-webkit-transition: all 150ms ease-out;
+    -moz-transition: all 150ms ease-out;
+    -o-transition: all 150ms ease-out;
+    -ms-transition: all 150ms ease-out;
+    transition: all 150ms ease-out;
 }
 .main {
 	left:0;
@@ -229,7 +234,6 @@ body {
 
 
 
-
 /* media queries */
 
 /* width */
@@ -278,7 +282,10 @@ body {
 	}
 }
 @media (max-width: 920px) {
-	.sidebar {
+	.sidebar.expanded {
+		min-width: 250px !important;
+	}
+	.sidebar.collapsed {
 		left: -200px;
 	}
 	.sidebar .expand {
