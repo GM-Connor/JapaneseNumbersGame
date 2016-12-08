@@ -25,6 +25,8 @@ body {
 }
 .main {
 	left:0;
+	overflow-x: hidden;
+	overflow-y: auto;
 	padding-left: 250px;
 	padding-right: 315px;
 	width: 100%;
