@@ -31,6 +31,7 @@ body {
 	z-index: 19;
 }
 .ad {
+	overflow-y: auto;
 	right:	0;
 	width:	315px;
 }
