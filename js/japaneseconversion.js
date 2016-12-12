@@ -218,6 +218,12 @@ var jpconv = {
 						return 'いっ';
 						break;
 				}
+			case '六':
+				switch(next_char) {
+					case '百':
+						return 'ろっ';
+						break;
+				}
 			case '八':
 				switch(next_char) {
 					case '百':
@@ -230,7 +236,8 @@ var jpconv = {
 					case '三':
 						return 'びゃく';
 						break;
-					case '六', '八':
+					case '六':
+					case '八':
 						return 'ぴゃく';
 						break;
 				}
