@@ -21,8 +21,8 @@ function addDifficultyListeners(difficulties) {
 			var element = $('.sidebar #' + difficulty)[0];
 			assert(typeof difficulty == 'string');
 			assert(element != undefined);
-			element.addEventListener('click', function() {
-				changeDifficulty(difficulty);
+			element.addEventListener('click', function(event) {
+				changeDifficulty(event, difficulty);
 			});
 		})(difficulties[i]);
 	return true;
@@ -107,7 +107,7 @@ function collapseSidebar() {
 }
 
 /* changing difficulty */
-function changeDifficulty(difficulty) {
+function changeDifficulty(event, difficulty) {
 	assert(typeof difficulty == 'string');
 	deActive();
 	$(event.target).addClass('active');
