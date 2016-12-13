@@ -207,49 +207,30 @@ var jpconv = {
 	},
 
 	'mapKanji': function(char, prev_char, next_char) {
-		switch(char) {
-			case '一':
-				switch(next_char) {
-					case '百':
-					case '千':
-						return '';
-						break;
-					case '兆':
-						return 'いっ';
-						break;
-				}
-			case '六':
-				switch(next_char) {
-					case '百':
-						return 'ろっ';
-						break;
-				}
-			case '八':
-				switch(next_char) {
-					case '百':
-					case '千':
-						return 'はっ';
-						break;
-				}
-			case '百':
-				switch(prev_char) {
-					case '三':
-						return 'びゃく';
-						break;
-					case '六':
-					case '八':
-						return 'ぴゃく';
-						break;
-				}
-			case '千':
-				switch(prev_char) {
-					case '三':
-						return 'ぜん';
-						break;
-				}
-			default:
-				return this.ktoh[char];
-				break;
+		if (char == '一') {
+			if (next_char == '百' || next_char == '千')
+				return '';
+			else if (next_char == '兆')
+				return 'いっ';
 		}
+		else if (char == '六') {
+			if (next_char == '百')
+				return 'ろっ';
+		}
+		else if (char == '八') {
+			if (next_char == '百' || next_char == '千')
+				return 'はっ';
+		}
+		else if (char == '百') {
+			if (prev_char == '三')
+				return 'びゃく';
+			else if (prev_char == '六' || prev_char == '八')
+				return 'ぴゃく';
+		}
+		else if (char == '千') {
+			if (prev_char == '三')
+				return 'ぜん';
+		}
+		return this.ktoh[char];
 	}
 };
